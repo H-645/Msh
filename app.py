@@ -1,10 +1,16 @@
-from flask import Flask
+from flask import Flask, jsonify
+from gold_data import get_gold_price
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "مرحباً بك في Chicha AI"
+    return "مرحباً بك في Chicha AI!"
 
-if __name__ == "__main__":
+@app.route('/gold-price')
+def gold_price():
+    price = get_gold_price()
+    return jsonify({'gold_price': price})
+
+if __name__ == '__main__':
     app.run(debug=True)
